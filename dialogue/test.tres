@@ -1,0 +1,40 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialogue_manager/dialogue_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+resource_version = 5
+syntax_version = 2
+raw_text = "~ start
+Nathan: I am saying this line.
+Nathan: The value of some_variable is"
+errors = [  ]
+titles = {
+"start": "1"
+}
+lines = {
+"0": {
+"next_id": "1",
+"text": "start",
+"type": "title"
+},
+"1": {
+"character": "Nathan",
+"character_replacements": [  ],
+"next_id": "2",
+"replacements": [  ],
+"text": "I am saying this line.",
+"translation_key": "I am saying this line.",
+"type": "dialogue"
+},
+"2": {
+"character": "Nathan",
+"character_replacements": [  ],
+"next_id": "",
+"replacements": [  ],
+"text": "The value of some_variable is",
+"translation_key": "The value of some_variable is",
+"type": "dialogue"
+}
+}

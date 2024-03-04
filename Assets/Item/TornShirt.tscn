@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://images/torn_shirt_alt.png" type="Texture" id=1]
+[ext_resource path="res://images/torn_shirt.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Item/Evidence.tscn" type="PackedScene" id=3]
+
+[node name="TornShirt" instance=ExtResource( 3 )]
+name = "Torn Shirt"
+description = "A torn shirt white button-up shirt. Completely frayed on all edges. One of its long sleeves is missing. Despite the violence imparted on this shirt, there’s no obvious blood stains to be seen."
+
+[node name="EvidenceNormal" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="EvidenceEvil" parent="." index="1"]
+texture = ExtResource( 1 )

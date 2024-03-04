@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://images/jimmy.png" type="Texture" id=1]
+[ext_resource path="res://Assets/NPC/AberrantNPC.tscn" type="PackedScene" id=2]
+
+[node name="Jimmryn Glonch" instance=ExtResource( 2 )]
+name = "Jimmryn Glonch"
+talk_lines = PoolStringArray( "Nice day were having!", "Seen any nice movies lately\? Me, I don\'t care for movies all that much.", "Hey, how\'s it going." )
+accuse_lines_wrong = PoolStringArray( "What\? How dare you!" )
+accuse_lines_right = PoolStringArray( "Uh, well, you see, the thing about that is..." )
+suspicion_rate = 10.0
+
+[node name="SpriteEvil" parent="." index="2"]
+texture = ExtResource( 1 )

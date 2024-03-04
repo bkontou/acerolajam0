@@ -1,0 +1,370 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://concrete.png" type="Texture" id=1]
+[ext_resource path="res://PC.tscn" type="PackedScene" id=2]
+[ext_resource path="res://city.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Item/Battery.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/NPC/JimmrynGlonch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://DialogueManager.gd" type="Script" id=6]
+[ext_resource path="res://dialogue/test.tres" type="Resource" id=7]
+[ext_resource path="res://GameHandler.cs" type="Script" id=8]
+[ext_resource path="res://Assets/Item/Receipt.tscn" type="PackedScene" id=9]
+[ext_resource path="res://EvidenceButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://EvidencePresenter.cs" type="Script" id=11]
+[ext_resource path="res://images/prison_bars.png" type="Texture" id=12]
+[ext_resource path="res://images/receipt.png" type="Texture" id=13]
+[ext_resource path="res://Assets/NPC/FritoSipps.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/NPC/SherylKrum.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/NPC/ScranMcDermit.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/NPC/MoppMahennity.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/NPC/ChumMaverick.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/font.tres" type="DynamicFont" id=19]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 50, 50 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 25, 25, 25 )
+
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( 25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 1
+albedo_color = Color( 0, 0, 0, 1 )
+proximity_fade_enable = true
+proximity_fade_distance = 2.0
+
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 4 )
+size = Vector3( 80, 80, 80 )
+
+[sub_resource type="ConcavePolygonShape" id=6]
+data = PoolVector3Array( -40, 40, 40, 40, 40, 40, -40, -40, 40, 40, 40, 40, 40, -40, 40, -40, -40, 40, 40, 40, -40, -40, 40, -40, 40, -40, -40, -40, 40, -40, -40, -40, -40, 40, -40, -40, 40, 40, 40, 40, 40, -40, 40, -40, 40, 40, 40, -40, 40, -40, -40, 40, -40, 40, -40, 40, -40, -40, 40, 40, -40, -40, -40, -40, 40, 40, -40, -40, 40, -40, -40, -40, 40, 40, 40, -40, 40, 40, 40, 40, -40, -40, 40, 40, -40, 40, -40, 40, 40, -40, -40, -40, 40, 40, -40, 40, -40, -40, -40, 40, -40, 40, 40, -40, -40, -40, -40, -40 )
+
+[sub_resource type="Environment" id=7]
+ambient_light_color = Color( 0.764706, 0.8, 0.843137, 1 )
+ambient_light_energy = 0.34
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_depth_end = 25.0
+adjustment_enabled = true
+adjustment_contrast = 1.25
+adjustment_saturation = 1.2
+
+[node name="MainScene" type="Spatial"]
+
+[node name="GameHandler" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 8 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameHandler"]
+pause_mode = 2
+
+[node name="PauseMenu" type="Panel" parent="GameHandler/CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.509804 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameHandler/CanvasLayer/PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Resume" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
+margin_top = 243.0
+margin_right = 1024.0
+margin_bottom = 278.0
+custom_fonts/font = ExtResource( 19 )
+text = "Resume"
+
+[node name="Quit" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
+margin_top = 282.0
+margin_right = 1024.0
+margin_bottom = 317.0
+custom_fonts/font = ExtResource( 19 )
+text = "Quit"
+
+[node name="Options" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
+margin_top = 321.0
+margin_right = 1024.0
+margin_bottom = 356.0
+custom_fonts/font = ExtResource( 19 )
+text = "Options"
+
+[node name="Dialogue" type="Control" parent="GameHandler/CanvasLayer"]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -168.0
+
+[node name="Panel" type="Panel" parent="GameHandler/CanvasLayer/Dialogue"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -370.0
+margin_top = -211.0
+margin_right = -24.0
+margin_bottom = -24.0
+
+[node name="DialogueBox" type="RichTextLabel" parent="GameHandler/CanvasLayer/Dialogue/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 9.0
+margin_right = -8.0
+margin_bottom = -11.0
+custom_fonts/mono_font = ExtResource( 19 )
+custom_fonts/normal_font = ExtResource( 19 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameHandler/CanvasLayer/Dialogue"]
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = -24.0
+margin_right = 388.0
+margin_bottom = -24.0
+
+[node name="TalkButton" type="Button" parent="GameHandler/CanvasLayer/Dialogue/VBoxContainer"]
+margin_right = 364.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 19 )
+text = "Talk"
+
+[node name="EvidenceButton" type="Button" parent="GameHandler/CanvasLayer/Dialogue/VBoxContainer"]
+margin_top = 39.0
+margin_right = 364.0
+margin_bottom = 74.0
+custom_fonts/font = ExtResource( 19 )
+text = "Present Evidence"
+
+[node name="AccuseButton" type="Button" parent="GameHandler/CanvasLayer/Dialogue/VBoxContainer"]
+margin_top = 78.0
+margin_right = 364.0
+margin_bottom = 113.0
+custom_fonts/font = ExtResource( 19 )
+text = "Accuse"
+
+[node name="GoodbyeButton" type="Button" parent="GameHandler/CanvasLayer/Dialogue/VBoxContainer"]
+margin_top = 117.0
+margin_right = 364.0
+margin_bottom = 152.0
+custom_fonts/font = ExtResource( 19 )
+text = "Goodbye"
+
+[node name="Evidence" type="Control" parent="GameHandler/CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+evidence_button_scene = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameHandler/CanvasLayer/Evidence"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 354.0
+margin_top = 423.0
+margin_right = -349.0
+margin_bottom = -24.0
+alignment = 2
+
+[node name="AllEvidence" type="HFlowContainer" parent="GameHandler/CanvasLayer/Evidence/VBoxContainer"]
+margin_top = 114.0
+margin_right = 321.0
+margin_bottom = 114.0
+
+[node name="EvidenceButton" parent="GameHandler/CanvasLayer/Evidence/VBoxContainer/AllEvidence" instance=ExtResource( 10 )]
+visible = false
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 13 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameHandler/CanvasLayer/Evidence/VBoxContainer"]
+margin_top = 118.0
+margin_right = 321.0
+margin_bottom = 153.0
+alignment = 1
+
+[node name="PresentEvidence" type="Button" parent="GameHandler/CanvasLayer/Evidence/VBoxContainer/HBoxContainer"]
+margin_left = 72.0
+margin_right = 166.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 19 )
+text = "Present"
+
+[node name="CancelEvidence" type="Button" parent="GameHandler/CanvasLayer/Evidence/VBoxContainer/HBoxContainer"]
+margin_left = 170.0
+margin_right = 249.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 19 )
+text = "Cancel"
+
+[node name="Panel" type="Panel" parent="GameHandler/CanvasLayer/Evidence"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 38.0
+margin_top = -533.0
+margin_right = 282.0
+margin_bottom = -36.0
+
+[node name="EvidenceInfo" type="RichTextLabel" parent="GameHandler/CanvasLayer/Evidence/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 14.0
+margin_right = -13.0
+margin_bottom = -14.0
+custom_fonts/normal_font = ExtResource( 19 )
+
+[node name="FailureScreen" type="Control" parent="GameHandler/CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="ColorRect" parent="GameHandler/CanvasLayer/FailureScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
+color = Color( 0, 0, 0, 0.4 )
+
+[node name="JailBars" type="TextureProgress" parent="GameHandler/CanvasLayer/FailureScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture_progress = ExtResource( 12 )
+nine_patch_stretch = true
+
+[node name="Label" type="Label" parent="GameHandler/CanvasLayer/FailureScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -131.0
+margin_top = -14.5
+margin_right = 131.0
+margin_bottom = 14.5
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 19 )
+text = "You Have Been Arrested"
+align = 1
+valign = 1
+
+[node name="ScreenFade" type="Control" parent="GameHandler/CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="FadeRect" type="ColorRect" parent="GameHandler/CanvasLayer/ScreenFade"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="FadeInfo" type="Label" parent="GameHandler/CanvasLayer/ScreenFade"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 19 )
+text = "hi"
+align = 1
+
+[node name="PC" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8269, 1.58751, 12.9824 )
+
+[node name="Environment" type="Spatial" parent="."]
+
+[node name="MeshInstance2" type="MeshInstance" parent="Environment"]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.880394, 0.404464, -9.10427 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Environment/MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/MeshInstance2/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Environment"]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.21921, 0, -9.10427 )
+mesh = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Environment/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Environment/MeshInstance/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource( 7 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Environment/WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 0.505718, 0.862699, 0, -0.862699, 0.505718, 0, 24.2723, 0 )
+light_color = Color( 0.631373, 0.607843, 0.607843, 1 )
+
+[node name="city" parent="." instance=ExtResource( 3 )]
+
+[node name="DialogueManager" type="Node" parent="."]
+script = ExtResource( 6 )
+cur_dialogue = ExtResource( 7 )
+
+[node name="Battery" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.80639, 1.42676, 2.45318 )
+
+[node name="NPCs" type="Node" parent="."]
+
+[node name="Jimmryn Glonch" parent="NPCs" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18376, 1.4268, 3.18245 )
+
+[node name="FritoSipps" parent="NPCs" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23324, 1.36898, 0.320295 )
+
+[node name="SherylKrum" parent="NPCs" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13915, 1.47468, 0.192898 )
+
+[node name="ChumMaverick" parent="NPCs" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.38903, 1.44558, 0.945629 )
+
+[node name="MoppMahennity" parent="NPCs" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.00198, 1.42128, 1.15261 )
+
+[node name="ScranMcDermit" parent="NPCs" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54459, 1.48612, 2.09267 )
+
+[node name="Evidence2" type="Node" parent="."]
+
+[node name="Receipt" parent="Evidence2" instance=ExtResource( 9 )]
+transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 7.87353, 0.56501, 3.39949 )
+
+[connection signal="pressed" from="GameHandler/CanvasLayer/PauseMenu/VBoxContainer/Resume" to="GameHandler" method="_on_Resume_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/PauseMenu/VBoxContainer/Quit" to="GameHandler" method="_on_Quit_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/PauseMenu/VBoxContainer/Options" to="GameHandler" method="_on_Options_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/Dialogue/VBoxContainer/TalkButton" to="GameHandler" method="_on_TalkButton_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/Dialogue/VBoxContainer/EvidenceButton" to="GameHandler" method="_on_EvidenceButton_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/Dialogue/VBoxContainer/AccuseButton" to="GameHandler" method="_on_AccuseButton_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/Dialogue/VBoxContainer/GoodbyeButton" to="GameHandler" method="_on_GoodbyeButton_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/Evidence/VBoxContainer/HBoxContainer/PresentEvidence" to="GameHandler/CanvasLayer/Evidence" method="_on_PresentEvidence_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/Evidence/VBoxContainer/HBoxContainer/CancelEvidence" to="GameHandler" method="_on_CancelEvidence_pressed"]
+[connection signal="evidence_found" from="PC" to="GameHandler/CanvasLayer/Evidence" method="_on_PC_evidence_found"]
+[connection signal="npc_talked_to" from="PC" to="GameHandler" method="_on_PC_npc_talked_to"]
+[connection signal="evidence_raised" from="NPCs/Jimmryn Glonch" to="GameHandler" method="_on_NPC_evidence_raised"]
+[connection signal="suspicion_raised" from="NPCs/Jimmryn Glonch" to="GameHandler" method="_on_NPC_suspicion_raised"]
+[connection signal="evidence_raised" from="NPCs/FritoSipps" to="GameHandler" method="_on_NPC_evidence_raised"]
+[connection signal="suspicion_raised" from="NPCs/FritoSipps" to="GameHandler" method="_on_NPC_suspicion_raised"]
+[connection signal="evidence_raised" from="NPCs/SherylKrum" to="GameHandler" method="_on_NPC_evidence_raised"]
+[connection signal="suspicion_raised" from="NPCs/SherylKrum" to="GameHandler" method="_on_NPC_suspicion_raised"]
+[connection signal="evidence_raised" from="NPCs/ChumMaverick" to="GameHandler" method="_on_NPC_evidence_raised"]
+[connection signal="suspicion_raised" from="NPCs/ChumMaverick" to="GameHandler" method="_on_NPC_suspicion_raised"]
+[connection signal="evidence_raised" from="NPCs/MoppMahennity" to="GameHandler" method="_on_NPC_evidence_raised"]
+[connection signal="suspicion_raised" from="NPCs/MoppMahennity" to="GameHandler" method="_on_NPC_suspicion_raised"]
+[connection signal="evidence_raised" from="NPCs/ScranMcDermit" to="GameHandler" method="_on_NPC_evidence_raised"]
+[connection signal="suspicion_raised" from="NPCs/ScranMcDermit" to="GameHandler" method="_on_NPC_suspicion_raised"]

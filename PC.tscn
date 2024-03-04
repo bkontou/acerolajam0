@@ -1,0 +1,212 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://PC.cs" type="Script" id=1]
+[ext_resource path="res://scope_overlay.png" type="Texture" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://NPCInfo.cs" type="Script" id=4]
+[ext_resource path="res://images/sus_bar_fill.png" type="Texture" id=5]
+[ext_resource path="res://images/sus_bar_empty.png" type="Texture" id=6]
+[ext_resource path="res://images/evidence_bar_empty.png" type="Texture" id=7]
+[ext_resource path="res://images/evidence_bar_fill.png" type="Texture" id=8]
+[ext_resource path="res://Assets/font.tres" type="DynamicFont" id=9]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.670998
+height = 0.813703
+
+[sub_resource type="RayShape" id=2]
+length = 5.60572
+
+[sub_resource type="CylinderMesh" id=3]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+radial_segments = 8
+
+[sub_resource type="Animation" id=5]
+resource_name = "scope_down"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -0.598 ), Vector3( 0.252848, -0.398398, -0.598161 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 68.219, 27.755, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "scope_up"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.252848, -0.398398, -0.598161 ), Vector3( 0, 0, -0.598 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 68.219, 27.755, 0 ), Vector3( 90, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:mesh")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 3 ) ]
+}
+
+[node name="PC" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Head" type="Spatial" parent="."]
+
+[node name="MainCamera" type="Camera" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.417759, 0 )
+cull_mask = 1048571
+current = true
+
+[node name="LookArea" type="Area" parent="Head/MainCamera"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="Head/MainCamera/LookArea"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Head/MainCamera"]
+transform = Transform( 0.884947, 0.432446, 0.1728, 0, 0.37106, -0.928609, -0.465692, 0.82177, 0.328368, 0.252848, -0.398398, -0.598161 )
+mesh = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/MainCamera/MeshInstance"]
+anims/scope_down = SubResource( 5 )
+anims/scope_up = SubResource( 4 )
+
+[node name="InteractionCast" type="RayCast" parent="Head/MainCamera"]
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
+collision_mask = 28
+
+[node name="SpecialCamera" type="Camera" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.417759, 0 )
+cull_mask = 1021
+fov = 35.0
+
+[node name="FloorChecker" type="RayCast" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScopeOverlay" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -851.0
+margin_top = -499.0
+margin_right = 851.0
+margin_bottom = 499.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="ScopeBattery" type="TextureProgress" parent="CanvasLayer/ScopeOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -321.0
+margin_top = -101.0
+margin_right = -257.0
+margin_bottom = 92.0
+value = 100.0
+texture_progress = ExtResource( 3 )
+fill_mode = 3
+
+[node name="NPCInfo" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -232.0
+margin_top = 24.0
+margin_right = -36.0
+margin_bottom = 279.0
+script = ExtResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/NPCInfo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 10.0
+margin_right = -5.0
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/NPCInfo/VBoxContainer"]
+margin_left = 8.0
+margin_right = 186.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 9 )
+text = "Chum Maverick"
+
+[node name="SuspicionBar" type="TextureProgress" parent="CanvasLayer/NPCInfo/VBoxContainer"]
+margin_top = 54.0
+margin_right = 186.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 0, 45 )
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 5 )
+nine_patch_stretch = true
+
+[node name="EvidenceBar" type="TextureProgress" parent="CanvasLayer/NPCInfo/VBoxContainer"]
+margin_top = 103.0
+margin_right = 186.0
+margin_bottom = 148.0
+rect_min_size = Vector2( 0, 45 )
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="OmniLight" type="OmniLight" parent="."]
+
+[connection signal="body_entered" from="Head/MainCamera/LookArea" to="." method="_on_LookArea_body_entered"]
+[connection signal="body_exited" from="Head/MainCamera/LookArea" to="." method="_on_LookArea_body_exited"]
+[connection signal="animation_finished" from="Head/MainCamera/MeshInstance/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,0 +1,59 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialogue_manager/dialogue_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+resource_version = 6
+syntax_version = 2
+raw_text = "~ start
+Jimmy: Hello, friend!
+Jimmy: How are you on this fine night? The weather is pleasant, isn't it?
+- Accuse
+- "
+errors = [  ]
+titles = {
+"start": "1"
+}
+lines = {
+"0": {
+"next_id": "1",
+"text": "start",
+"type": "title"
+},
+"1": {
+"character": "Jimmy",
+"character_replacements": [  ],
+"next_id": "2",
+"replacements": [  ],
+"text": "Hello, friend!",
+"translation_key": "Hello, friend!",
+"type": "dialogue"
+},
+"2": {
+"character": "Jimmy",
+"character_replacements": [  ],
+"next_id": "3",
+"replacements": [  ],
+"text": "How are you on this fine night? The weather is pleasant, isn't it?",
+"translation_key": "How are you on this fine night? The weather is pleasant, isn't it?",
+"type": "dialogue"
+},
+"3": {
+"next_id": "4",
+"next_id_after": "4",
+"replacements": [  ],
+"responses": PoolStringArray( "3" ),
+"text": "Accuse",
+"translation_key": "Accuse",
+"type": "response"
+},
+"4": {
+"character": "",
+"next_id": "",
+"replacements": [  ],
+"text": "-",
+"translation_key": "-",
+"type": "dialogue"
+}
+}

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://images/tissue_alt.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Item/Evidence.tscn" type="PackedScene" id=2]
+[ext_resource path="res://images/tissue.png" type="Texture" id=3]
+
+[node name="Tissue" instance=ExtResource( 2 )]
+name = "Used Tissue"
+description = "A used tissue you found on the ground. Despite how long it's been sitting here, its contents are still very much wet. Something is off about it."
+
+[node name="EvidenceNormal" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="EvidenceEvil" parent="." index="1"]
+texture = ExtResource( 1 )

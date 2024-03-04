@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://images/envelope_alt.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Item/Evidence.tscn" type="PackedScene" id=2]
+
+[node name="Envelope" instance=ExtResource( 2 )]
+name = "Manilla Envelope"
+description = "A manilla envelope containing various receipts, communications, and other incriminating evidence. It looks like some sort of scheme was hatched to embezzle public funds into the pockets of a handful of co-conspirators. Also, the term “” keeps popping up throughout the correspondences. There’s some odd writing on the back that you can't quite make out."
+
+[node name="EvidenceEvil" parent="." index="1"]
+texture = ExtResource( 1 )

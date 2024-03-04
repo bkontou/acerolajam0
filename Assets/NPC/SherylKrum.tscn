@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/NPC/AberrantNPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/sheryl_krum.png" type="Texture" id=2]
+
+[node name="SherylKrum" instance=ExtResource( 1 )]
+name = "Sheryl Krum"
+
+[node name="SpriteNormal" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="SpriteEvil" parent="." index="2"]
+texture = ExtResource( 2 )

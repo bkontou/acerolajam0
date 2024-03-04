@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Item/Evidence.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/receipt.png" type="Texture" id=2]
+
+[node name="Receipt" instance=ExtResource( 1 )]
+transform = Transform( 1.00324, 0, 0, 0, 1.00324, 0, 0, 0, 1.00324, 0, 0, 0 )
+name = "Old Receipt"
+description = "An old receipt for something called a “Man Pillow”, advertised as a pillow for men. A cursory look on their website reveals that it can increase your muscle mass by 8.4% per night, and that for just $39.99 per month, you subscribe to get free pillow samples in the mail. A very messy signature is on the bottom. You can kind of make out the letters ‘J’ and ‘Y’. Whoever this belongs to bought $2131.39 worth of Man Pillow."
+
+[node name="EvidenceNormal" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="EvidenceEvil" parent="." index="1"]
+texture = ExtResource( 2 )
