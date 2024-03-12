@@ -30,7 +30,7 @@ public class Evidence : StaticBody
 		info.name = name;
 		info.description = description;
 		info.item_image_normal = ((Sprite3D)FindNode("EvidenceNormal")).Texture;
-		info.item_image_alt = ((Sprite3D)FindNode("EvidenceNormal")).Texture;
+		info.item_image_alt = ((Sprite3D)FindNode("EvidenceEvil")).Texture;
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

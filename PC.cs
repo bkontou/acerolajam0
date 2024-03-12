@@ -45,7 +45,7 @@ public class PC : KinematicBody
 	public delegate void evidence_found(Evidence evidence);
 	
 	// info
-	float scope_battery = 100;
+	public float scope_battery = 100;
 	public bool scope_up = false;
 	
 	uint special_camera_mask = 1021;

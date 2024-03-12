@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Item/Evidence.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/pamphlet.png" type="Texture" id=2]
+
+[node name="Pamphlet" instance=ExtResource( 1 )]
+name = "Pamphlet"
+description = "A pamphlet published by an organization calling themselves ‘The Truthday Times’. It contains a rundown of what they refer to as ‘xenoassimillationistic cosmocracy’. All of this is going way over your head. Oh no, now they’re arguing whether a competing publication, ‘The Skyward Observer’, is effectively utilizing resources with their spectral telescope project, and mocking their idea that any alien force could be improved from the inside by working on more ethical probing technology. This is starting to hurt your brain, but between tirades you get a sense that something, maybe even something nefarious, may be going on."
+
+[node name="EvidenceNormal" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="EvidenceEvil" parent="." index="1"]
+texture = ExtResource( 2 )

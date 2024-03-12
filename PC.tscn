@@ -1,14 +1,15 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://PC.cs" type="Script" id=1]
 [ext_resource path="res://scope_overlay.png" type="Texture" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://images/battery_empty.png" type="Texture" id=3]
 [ext_resource path="res://NPCInfo.cs" type="Script" id=4]
 [ext_resource path="res://images/sus_bar_fill.png" type="Texture" id=5]
 [ext_resource path="res://images/sus_bar_empty.png" type="Texture" id=6]
 [ext_resource path="res://images/evidence_bar_empty.png" type="Texture" id=7]
 [ext_resource path="res://images/evidence_bar_fill.png" type="Texture" id=8]
 [ext_resource path="res://Assets/font.tres" type="DynamicFont" id=9]
+[ext_resource path="res://images/battery_fill.png" type="Texture" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.670998
@@ -153,13 +154,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -321.0
-margin_top = -101.0
-margin_right = -257.0
-margin_bottom = 92.0
+margin_left = -482.0
+margin_top = -283.0
+margin_right = -391.0
+margin_bottom = -95.0
 value = 100.0
-texture_progress = ExtResource( 3 )
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 10 )
 fill_mode = 3
+nine_patch_stretch = true
 
 [node name="NPCInfo" type="Panel" parent="CanvasLayer"]
 pause_mode = 2

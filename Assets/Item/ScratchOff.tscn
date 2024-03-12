@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Item/Evidence.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/scratch_off_ticket.png" type="Texture" id=2]
+
+[node name="ScratchOff" instance=ExtResource( 1 )]
+name = "Old Scratchoff Ticket"
+description = "An old scratchoff lotto ticket. Its already been scratched, unfortunately. Even more unfortunately, its not a winner. They didn’t even win any of the smaller prizes, like the $2 that you would pay off the ticket. Not even worth the effort to put it in a trashcan. Well, maybe you can be a good samaritan and put it there for them."
+
+[node name="EvidenceNormal" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="EvidenceEvil" parent="." index="1"]
+texture = ExtResource( 2 )

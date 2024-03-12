@@ -13,6 +13,8 @@ public class GameHandler : Node
 	public PC pc;
 	
 	int dialogue_index = 0;
+	
+	bool game_ended = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -20,7 +22,9 @@ public class GameHandler : Node
 		GetTree().Paused = true;
 		GD.Randomize();
 		((EvidencePresenter)FindNode("Evidence")).game_handler = this;
+		((EvidenceViewer)FindNode("EvidenceViewer")).evidence_presenter = ((EvidencePresenter)FindNode("Evidence"));
 		pc = (PC)GetParent().FindNode("PC");
+		((EvidenceViewer)FindNode("EvidenceViewer")).pc = pc;
 	}
 	
 	public override void _Process(float delta)
@@ -84,6 +88,18 @@ public class GameHandler : Node
 		// Replace with function body.
 	}
 
+	private void _on_Evidence_pressed()
+	{
+		((Control)FindNode("EvidenceViewer")).Visible = true;
+		((EvidenceViewer)FindNode("EvidenceViewer")).PopulateEvidence();
+		
+	}
+
+
+	private void _on_EvidenceViewerBack_pressed()
+	{
+		((Control)FindNode("EvidenceViewer")).Visible = false;
+	}
 
 	private void _on_PC_npc_talked_to(object npc)
 	{
@@ -150,7 +166,11 @@ public class GameHandler : Node
 	
 	private void _on_NPC_suspicion_raised()
 	{
-		GD.Print("Uh oh!");
+		if (game_ended) {
+			return;
+		} else {
+			game_ended = true;
+		}
 
 		if (pc.scope_up)
 		{
@@ -167,6 +187,10 @@ public class GameHandler : Node
 
 	private void _on_NPC_evidence_raised(string name)
 	{
+		if (game_ended) {
+			return;
+		} 
+		
 		ArrestNPC(name);
 	}
 	
@@ -189,4 +213,6 @@ public class GameHandler : Node
 //      
 //  }
 }
+
+
 

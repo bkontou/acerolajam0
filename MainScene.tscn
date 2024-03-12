@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://concrete.png" type="Texture" id=1]
 [ext_resource path="res://PC.tscn" type="PackedScene" id=2]
@@ -19,6 +19,25 @@
 [ext_resource path="res://Assets/NPC/MoppMahennity.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/NPC/ChumMaverick.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/font.tres" type="DynamicFont" id=19]
+[ext_resource path="res://Assets/Item/Photo.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Item/Watch.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Item/Keys.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Item/ScratchOff.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Item/TornShirt.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/Item/BananaPeel.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Assets/Item/Tissue.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/Item/report.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Assets/Item/Envelope.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Assets/Item/Pamphlet.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Item/BeerCan.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Assets/Item/ActionFigure.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Assets/Item/SprayPaint.tscn" type="PackedScene" id=32]
+[ext_resource path="res://images/keys.png" type="Texture" id=33]
+[ext_resource path="res://images/keys_alt.png" type="Texture" id=34]
+[ext_resource path="res://EvidenceViewer.cs" type="Script" id=35]
+[ext_resource path="res://scope_overlay.png" type="Texture" id=36]
+[ext_resource path="res://images/battery_empty.png" type="Texture" id=37]
+[ext_resource path="res://images/battery_fill.png" type="Texture" id=38]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 50, 50 )
@@ -75,23 +94,30 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Resume" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
-margin_top = 243.0
+margin_top = 224.0
 margin_right = 1024.0
-margin_bottom = 278.0
+margin_bottom = 259.0
 custom_fonts/font = ExtResource( 19 )
 text = "Resume"
 
-[node name="Quit" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
-margin_top = 282.0
+[node name="EvidenceViewerButton" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
+margin_top = 263.0
 margin_right = 1024.0
-margin_bottom = 317.0
+margin_bottom = 298.0
+custom_fonts/font = ExtResource( 19 )
+text = "Evidence"
+
+[node name="Quit" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
+margin_top = 302.0
+margin_right = 1024.0
+margin_bottom = 337.0
 custom_fonts/font = ExtResource( 19 )
 text = "Quit"
 
 [node name="Options" type="Button" parent="GameHandler/CanvasLayer/PauseMenu/VBoxContainer"]
-margin_top = 321.0
+margin_top = 341.0
 margin_right = 1024.0
-margin_bottom = 356.0
+margin_bottom = 376.0
 custom_fonts/font = ExtResource( 19 )
 text = "Options"
 
@@ -279,6 +305,91 @@ custom_fonts/font = ExtResource( 19 )
 text = "hi"
 align = 1
 
+[node name="EvidenceViewer" type="Control" parent="GameHandler/CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 35 )
+evidence_button_scene = ExtResource( 10 )
+
+[node name="Panel" type="ColorRect" parent="GameHandler/CanvasLayer/EvidenceViewer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
+color = Color( 0, 0, 0, 0.4 )
+
+[node name="ItemNormal" type="Sprite" parent="GameHandler/CanvasLayer/EvidenceViewer"]
+position = Vector2( 765, 264 )
+texture = ExtResource( 33 )
+
+[node name="ItemAlt" type="Sprite" parent="GameHandler/CanvasLayer/EvidenceViewer"]
+visible = false
+position = Vector2( 765, 264 )
+texture = ExtResource( 34 )
+
+[node name="HSplitContainer" type="HSplitContainer" parent="GameHandler/CanvasLayer/EvidenceViewer"]
+margin_right = 520.0
+margin_bottom = 506.0
+
+[node name="ViewerAllEvidence" type="HFlowContainer" parent="GameHandler/CanvasLayer/EvidenceViewer/HSplitContainer"]
+margin_bottom = 506.0
+
+[node name="ViewerEvidenceInfo" type="RichTextLabel" parent="GameHandler/CanvasLayer/EvidenceViewer/HSplitContainer"]
+margin_left = 12.0
+margin_right = 520.0
+margin_bottom = 506.0
+custom_fonts/normal_font = ExtResource( 19 )
+text = "helloooo
+ lfksadjflwk jef
+w elkfa jwe'f; jwaelkf ja
+ew ;kfja;wle kjf
+aw jeflkajew ;flka jew;lfk jwa'elkf jaew' fjawe'l jlk"
+
+[node name="ScopeViewerRect" type="TextureRect" parent="GameHandler/CanvasLayer/EvidenceViewer"]
+visible = false
+margin_left = -231.0
+margin_top = -292.0
+margin_right = 1689.0
+margin_bottom = 788.0
+texture = ExtResource( 36 )
+
+[node name="ScopeBattery" type="TextureProgress" parent="GameHandler/CanvasLayer/EvidenceViewer/ScopeViewerRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -688.0
+margin_top = -214.0
+margin_right = -597.0
+margin_bottom = -26.0
+value = 100.0
+texture_under = ExtResource( 37 )
+texture_progress = ExtResource( 38 )
+fill_mode = 3
+nine_patch_stretch = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameHandler/CanvasLayer/EvidenceViewer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -74.0
+
+[node name="ViewViaScope" type="Button" parent="GameHandler/CanvasLayer/EvidenceViewer/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 19 )
+text = "View With Scope"
+
+[node name="EvidenceViewerBack" type="Button" parent="GameHandler/CanvasLayer/EvidenceViewer/VBoxContainer"]
+margin_top = 39.0
+margin_right = 1024.0
+margin_bottom = 74.0
+custom_fonts/font = ExtResource( 19 )
+text = "Back"
+
 [node name="PC" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8269, 1.58751, 12.9824 )
 
@@ -317,35 +428,89 @@ light_color = Color( 0.631373, 0.607843, 0.607843, 1 )
 script = ExtResource( 6 )
 cur_dialogue = ExtResource( 7 )
 
-[node name="Battery" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.80639, 1.42676, 2.45318 )
-
 [node name="NPCs" type="Node" parent="."]
 
 [node name="Jimmryn Glonch" parent="NPCs" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18376, 1.4268, 3.18245 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.56644, 1.4268, 4.41222 )
 
 [node name="FritoSipps" parent="NPCs" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23324, 1.36898, 0.320295 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9067, 1.36898, 1.62693 )
 
 [node name="SherylKrum" parent="NPCs" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13915, 1.47468, 0.192898 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4415, 1.47468, -13.6715 )
 
 [node name="ChumMaverick" parent="NPCs" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.38903, 1.44558, 0.945629 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9498, 1.44558, 12.3827 )
 
 [node name="MoppMahennity" parent="NPCs" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.00198, 1.42128, 1.15261 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.990715, 1.42128, -9.3773 )
 
 [node name="ScranMcDermit" parent="NPCs" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54459, 1.48612, 2.09267 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60224, 1.48612, 1.26084 )
 
 [node name="Evidence2" type="Node" parent="."]
 
 [node name="Receipt" parent="Evidence2" instance=ExtResource( 9 )]
-transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 7.87353, 0.56501, 3.39949 )
+transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 9.77525, 0.733705, 1.85698 )
+
+[node name="Keys" parent="Evidence2" instance=ExtResource( 22 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -9.82082, 0.867318, 8.71107 )
+
+[node name="Photo" parent="Evidence2" instance=ExtResource( 20 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -5.52558, 0.639477, -8.62322 )
+
+[node name="Watch" parent="Evidence2" instance=ExtResource( 21 )]
+transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 30.131, 0.775246, 1.5709 )
+
+[node name="NormalReport" parent="Evidence2" instance=ExtResource( 27 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.65453, 1.03595, -11.4813 )
+
+[node name="Tissue" parent="Evidence2" instance=ExtResource( 26 )]
+transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 14.1167, 0.580912, -12.5482 )
+
+[node name="BeerCan" parent="Evidence2" instance=ExtResource( 30 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 21.2238, 0.640712, -9.72483 )
+
+[node name="Envelope" parent="Evidence2" instance=ExtResource( 28 )]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -10.2098, 0.828925, 1.15546 )
+
+[node name="Pamphlet" parent="Evidence2" instance=ExtResource( 29 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1.53689, 1.66304, 3.47199 )
+
+[node name="TornShirt" parent="Evidence2" instance=ExtResource( 24 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 13.1756, 0.673199, -11.5025 )
+
+[node name="BananaPeel" parent="Evidence2" instance=ExtResource( 25 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 16.2445, 1.05428, -10.013 )
+
+[node name="ScratchOff" parent="Evidence2" instance=ExtResource( 23 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -25.5146, 0.604596, 3.76445 )
+
+[node name="SprayPaint" parent="Evidence2" instance=ExtResource( 32 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -19.6874, 0.64342, 14.8265 )
+
+[node name="ActionFigure" parent="Evidence2" instance=ExtResource( 31 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 22.273, 0.735005, 9.62026 )
+
+[node name="Batteries" type="Node" parent="."]
+
+[node name="Battery" parent="Batteries" instance=ExtResource( 4 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.3, -1.63238, 1.55612, 2.45318 )
+
+[node name="Battery2" parent="Batteries" instance=ExtResource( 4 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.3, -14.0425, 0.653187, -11.7673 )
+
+[node name="Battery3" parent="Batteries" instance=ExtResource( 4 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.3, 17.5241, 0.653187, -11.1082 )
+
+[node name="Battery4" parent="Batteries" instance=ExtResource( 4 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.3, 18.3149, 0.653187, 0.490335 )
+
+[node name="Battery5" parent="Batteries" instance=ExtResource( 4 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.3, 24.5096, 0.653187, 19.4698 )
 
 [connection signal="pressed" from="GameHandler/CanvasLayer/PauseMenu/VBoxContainer/Resume" to="GameHandler" method="_on_Resume_pressed"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/PauseMenu/VBoxContainer/EvidenceViewerButton" to="GameHandler" method="_on_Evidence_pressed"]
 [connection signal="pressed" from="GameHandler/CanvasLayer/PauseMenu/VBoxContainer/Quit" to="GameHandler" method="_on_Quit_pressed"]
 [connection signal="pressed" from="GameHandler/CanvasLayer/PauseMenu/VBoxContainer/Options" to="GameHandler" method="_on_Options_pressed"]
 [connection signal="pressed" from="GameHandler/CanvasLayer/Dialogue/VBoxContainer/TalkButton" to="GameHandler" method="_on_TalkButton_pressed"]
@@ -354,6 +519,9 @@ transform = Transform( 0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 7.87353, 0.56501, 
 [connection signal="pressed" from="GameHandler/CanvasLayer/Dialogue/VBoxContainer/GoodbyeButton" to="GameHandler" method="_on_GoodbyeButton_pressed"]
 [connection signal="pressed" from="GameHandler/CanvasLayer/Evidence/VBoxContainer/HBoxContainer/PresentEvidence" to="GameHandler/CanvasLayer/Evidence" method="_on_PresentEvidence_pressed"]
 [connection signal="pressed" from="GameHandler/CanvasLayer/Evidence/VBoxContainer/HBoxContainer/CancelEvidence" to="GameHandler" method="_on_CancelEvidence_pressed"]
+[connection signal="button_down" from="GameHandler/CanvasLayer/EvidenceViewer/VBoxContainer/ViewViaScope" to="GameHandler/CanvasLayer/EvidenceViewer" method="_on_ViewViaScope_button_down"]
+[connection signal="button_up" from="GameHandler/CanvasLayer/EvidenceViewer/VBoxContainer/ViewViaScope" to="GameHandler/CanvasLayer/EvidenceViewer" method="_on_ViewViaScope_button_up"]
+[connection signal="pressed" from="GameHandler/CanvasLayer/EvidenceViewer/VBoxContainer/EvidenceViewerBack" to="GameHandler" method="_on_EvidenceViewerBack_pressed"]
 [connection signal="evidence_found" from="PC" to="GameHandler/CanvasLayer/Evidence" method="_on_PC_evidence_found"]
 [connection signal="npc_talked_to" from="PC" to="GameHandler" method="_on_PC_npc_talked_to"]
 [connection signal="evidence_raised" from="NPCs/Jimmryn Glonch" to="GameHandler" method="_on_NPC_evidence_raised"]

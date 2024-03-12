@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Item/Evidence.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/keys.png" type="Texture" id=2]
+[ext_resource path="res://images/keys_alt.png" type="Texture" id=3]
+
+[node name="Keys" instance=ExtResource( 1 )]
+name = "Set of Keys"
+description = "Set of keys found on the ground. Three keys hang on this key ring. Of the three, one is of a particularly odd shape, like nothing you’ve seen before. A souvenir keychain depicting cancun sits on the keyring beside the other three keys."
+
+[node name="EvidenceNormal" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="EvidenceEvil" parent="." index="1"]
+texture = ExtResource( 3 )
